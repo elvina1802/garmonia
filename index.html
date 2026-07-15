@@ -1,22 +1,819 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Гармония | Центр красоты и здоровья</title>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/mobile.css">
-
+    <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* ===== ТОЛЬКО ДЛЯ МОБИЛЬНЫХ — ФОТО КАК ФОН ===== */
+        /* ==========================
+           СБРОС И БАЗОВЫЕ СТИЛИ
+        ========================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #222222;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        /* ==========================
+           HEADER
+        ========================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            backdrop-filter: blur(14px);
+            background: rgba(28, 28, 28, 0.82);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+        }
+
+        header .container {
+            height: 90px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 70px;
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #D4AF37;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 42px;
+        }
+
+        nav a {
+            color: white;
+            font-size: 15px;
+            transition: 0.35s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #D4AF37;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 2px;
+            background: #D4AF37;
+            transition: 0.35s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Бургер */
+        .burger {
+            width: 34px;
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .burger span {
+            width: 100%;
+            height: 3px;
+            background: white;
+            border-radius: 20px;
+            transition: 0.4s;
+        }
+
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Мобильное меню */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 82%;
+            height: 100vh;
+            background: #1d1d1d;
+            padding: 120px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            transition: 0.45s;
+            z-index: 998;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            font-size: 22px;
+            color: white;
+        }
+
+        .menu-btn {
+            margin-top: 25px;
+            background: #D4AF37;
+            color: #222;
+            padding: 16px;
+            text-align: center;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+
+        /* ==========================
+           HERO — ОСНОВНАЯ СЕКЦИЯ
+        ========================== */
+        .hero {
+            min-height: 100vh;
+            background: #262626;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(34, 34, 34, 0.92) 25%, rgba(34, 34, 34, 0.40) 60%, transparent 100%);
+            z-index: 1;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+            position: relative;
+            z-index: 5;
+            padding-top: 120px;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+            z-index: 0;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        .hero-text {
+            padding-right: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-text .subtitle {
+            font-size: 16px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #D4AF37;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .hero-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(56px, 9vw, 96px);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #c8c8c8;
+            max-width: 520px;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 36px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        .gold-btn {
+            display: inline-block;
+            background: #D4AF37;
+            color: #1a1a1a;
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .gold-btn:hover {
+            background: #c49a2a;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.25);
+        }
+
+        .transparent-btn {
+            display: inline-block;
+            padding: 18px 46px;
+            border-radius: 50px;
+            border: 1.5px solid #D4AF37;
+            color: #D4AF37;
+            font-weight: 500;
+            font-size: 16px;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .transparent-btn:hover {
+            background: #D4AF37;
+            color: #1a1a1a;
+        }
+
+        /* ==========================
+           УСЛУГИ
+        ========================== */
+        .services-section {
+            padding-bottom: 20px;
+        }
+
+        .section-title {
+            padding: 70px 0 30px;
+            text-align: center;
+        }
+
+        .section-title span {
+            font-size: 13px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #D4AF37;
+            font-weight: 500;
+        }
+
+        .section-title h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(30px, 4vw, 48px);
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 4px;
+        }
+
+        .services-slider-wrapper {
+            width: 100%;
+            overflow: visible;
+            padding: 0;
+        }
+
+        .services-slider {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 8px 20px 20px 20px;
+            scrollbar-width: none;
+            width: 100%;
+        }
+
+        .services-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .service-card {
+            flex: 0 0 300px;
+            background: #2a2a2a;
+            border-radius: 20px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            transition: transform 0.35s, box-shadow 0.35s;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 22px 20px 26px;
+        }
+
+        .service-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .service-content p {
+            font-size: 14px;
+            color: #b0b0b0;
+            font-weight: 300;
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        .service-btn {
+            font-size: 13px;
+            font-weight: 500;
+            color: #D4AF37;
+            border-bottom: 1.5px solid #D4AF37;
+            padding-bottom: 3px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .service-btn:hover {
+            color: #c49a2a;
+            border-color: #c49a2a;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 10px 0 40px;
+        }
+
+        .slider-dots span {
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #3d3d3d;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .slider-dots span.active {
+            background: #D4AF37;
+            width: 30px;
+            border-radius: 10px;
+        }
+
+        /* ==========================
+           ABOUT
+        ========================== */
+        .about {
+            padding: 80px 0;
+            background: #1f1f1f;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-image img {
+            border-radius: 24px;
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .about-content .section-subtitle,
+        .advantages .section-subtitle,
+        .contacts-info .section-subtitle {
+            font-size: 13px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #D4AF37;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .about-content h2,
+        .advantages h2,
+        .contacts-info h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(28px, 3.5vw, 42px);
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        .about-content p,
+        .contacts-info p {
+            color: #b8b8b8;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 14px;
+        }
+
+        .about-content .gold-btn,
+        .contacts-info .gold-btn {
+            margin-top: 8px;
+        }
+
+        /* ==========================
+           ADVANTAGES
+        ========================== */
+        .advantages {
+            padding: 80px 0;
+            background: #262626;
+            text-align: center;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
+
+        .advantage-card {
+            background: #1f1f1f;
+            padding: 32px 22px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.06);
+            transition: transform 0.35s, box-shadow 0.35s;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+        }
+
+        .advantage-card .icon {
+            font-size: 36px;
+            margin-bottom: 14px;
+        }
+
+        .advantage-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .advantage-card p {
+            font-size: 14px;
+            color: #a8a8a8;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ==========================
+           CONTACTS
+        ========================== */
+        .contacts {
+            padding: 80px 0;
+            background: #1f1f1f;
+        }
+
+        .contacts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contacts-map {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            min-height: 320px;
+        }
+
+        .contacts-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 320px;
+            border: none;
+        }
+
+        /* ==========================
+           FOOTER
+        ========================== */
+        footer {
+            background: #161616;
+            padding: 50px 0 24px;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.06);
+        }
+
+        footer .logo-footer img {
+            height: 60px;
+            margin: 0 auto 10px;
+        }
+
+        footer h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        footer .footer-sub {
+            font-size: 14px;
+            color: #888;
+            font-weight: 300;
+            margin-bottom: 16px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin: 16px 0 28px;
+        }
+
+        .footer-social a {
+            font-size: 13px;
+            color: #a0a0a0;
+            transition: 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: #D4AF37;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #5a5a5a;
+            margin-top: 10px;
+        }
+
+        /* ==========================
+           МОДАЛЬНОЕ ОКНО
+        ========================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s, visibility 0.35s;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #2a2a2a;
+            border-radius: 24px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 30px 28px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            transform: translateY(20px);
+            transition: transform 0.35s;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            font-size: 36px;
+            color: #D4AF37;
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #ffffff;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: #D4AF37;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .modal-text {
+            font-size: 15px;
+            color: #c0c0c0;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .modal-btn {
+            display: inline-block;
+            background: #D4AF37;
+            color: #1a1a1a;
+            padding: 14px 34px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 15px;
+            text-align: center;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .modal-btn:hover {
+            background: #c49a2a;
+            transform: translateY(-2px);
+        }
+
+        /* ==========================
+           АДАПТИВ
+        ========================== */
+        @media (max-width: 1024px) {
+            .hero-container {
+                gap: 40px;
+            }
+            .hero-text h1 {
+                font-size: clamp(46px, 7vw, 72px);
+            }
+            .hero-image img {
+                max-width: 650px;
+            }
+            .advantages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-container {
+                grid-template-columns: 1fr 1fr;
+                text-align: left;
+                padding-top: 100px;
+                gap: 30px;
+            }
+            .hero-text {
+                padding-right: 20px;
+                z-index: 10;
+            }
+            .hero-text h1 {
+                font-size: clamp(40px, 6vw, 56px);
+            }
+            .hero-text p {
+                max-width: 100%;
+                font-size: 16px;
+            }
+            .hero-buttons {
+                justify-content: flex-start;
+            }
+            .hero-image {
+                justify-content: flex-end;
+                z-index: 0;
+            }
+            .hero-image img {
+                max-width: 500px;
+                z-index: 0;
+            }
+            .hero-overlay {
+                background: linear-gradient(90deg, rgba(34, 34, 34, 0.92) 30%, rgba(34, 34, 34, 0.45) 70%, transparent 100%);
+            }
+            .gold-btn {
+                padding: 16px 40px;
+                font-size: 15px;
+            }
+            .transparent-btn {
+                padding: 16px 36px;
+                font-size: 15px;
+            }
+            .about-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .about-image img {
+                height: 300px;
+            }
+            .contacts-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .contacts-info .gold-btn {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
         @media (max-width: 768px) {
+            header .container {
+                height: 76px;
+            }
+            .logo img {
+                height: 54px;
+            }
+            .logo-text {
+                font-size: 20px;
+            }
+            nav {
+                display: none;
+            }
+            .burger {
+                display: flex;
+            }
+
+            /* Мобильный hero с фоновой картинкой */
             .hero {
                 position: relative;
                 min-height: 100vh;
@@ -24,7 +821,6 @@
                 overflow: hidden;
             }
 
-            /* Фоновое изображение */
             .hero-bg-mobile {
                 display: block !important;
                 position: absolute;
@@ -50,6 +846,8 @@
                 min-height: 100dvh;
                 display: flex;
                 align-items: center;
+                grid-template-columns: 1fr; /* меняем на одну колонку */
+                padding-top: 80px;
             }
 
             .hero-image {
@@ -57,19 +855,18 @@
             }
 
             .hero-text {
-    padding: 5px 20px 10px 0;
-    max-width: 100%;
-    width: 100%;
-    z-index: 2;
-    position: relative;
-    transform: translateY(100px);  /* ← ЭТО ПОДНИМЕТ ТЕКСТ ВЫШЕ */
-}
+                padding: 5px 20px 10px 0;
+                max-width: 100%;
+                width: 100%;
+                z-index: 2;
+                position: relative;
+                transform: translateY(100px);
+            }
 
             .hero-text h1 {
                 font-size: clamp(38px, 10vw, 52px);
             }
 
-            /* ===== ТЕКСТ ПО ШИРИНЕ КНОПОК ===== */
             .hero-text p {
                 max-width: 340px;
                 font-size: 15px;
@@ -78,10 +875,96 @@
             .hero-buttons {
                 max-width: 340px;
             }
+
+            .services-slider {
+                gap: 14px;
+                padding: 8px 16px 20px 16px;
+            }
+            .service-card {
+                flex: 0 0 250px;
+            }
+            .service-card img {
+                height: 160px;
+            }
+            .section-title {
+                padding: 40px 0 16px;
+            }
+            .section-title h2 {
+                font-size: clamp(24px, 5vw, 32px);
+            }
+            .about {
+                padding: 40px 0;
+            }
+            .about-image img {
+                height: 200px;
+            }
+            .about-container {
+                gap: 30px;
+            }
+            .about-content h2 {
+                font-size: clamp(24px, 4vw, 30px);
+            }
+            .advantages {
+                padding: 40px 0;
+            }
+            .advantages-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .advantage-card {
+                padding: 20px 12px;
+            }
+            .advantage-card h3 {
+                font-size: 14px;
+            }
+            .advantage-card p {
+                font-size: 12px;
+            }
+            .advantage-card .icon {
+                font-size: 28px;
+            }
+            .contacts {
+                padding: 40px 0;
+            }
+            .contacts-map {
+                min-height: 200px;
+            }
+            .contacts-map iframe {
+                min-height: 200px;
+            }
+            .contacts-info p {
+                font-size: 14px;
+            }
+            .about-content .gold-btn {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* Модальное окно на телефоне */
+            .modal-content {
+                padding: 24px 18px;
+            }
+            .modal-title {
+                font-size: 26px;
+            }
+            .modal-text {
+                font-size: 14px;
+            }
+            .modal-img {
+                height: 180px;
+            }
+            .modal-close {
+                font-size: 30px;
+                top: 8px;
+                right: 12px;
+            }
         }
 
-        /* Очень маленькие телефоны */
         @media (max-width: 480px) {
+            .hero-text .subtitle {
+                font-size: 11px;
+                letter-spacing: 4px;
+            }
             .hero-text h1 {
                 font-size: clamp(32px, 12vw, 42px);
             }
@@ -89,30 +972,99 @@
                 max-width: 280px;
                 font-size: 13px;
             }
-            .hero-text .subtitle {
-                font-size: 11px;
-                letter-spacing: 4px;
-            }
             .hero-buttons {
                 max-width: 280px;
             }
+
+            .service-card {
+                flex: 0 0 200px;
+            }
+            .service-content {
+                padding: 14px 12px 16px;
+            }
+            .service-content h3 {
+                font-size: 16px;
+            }
+            .service-content p {
+                font-size: 11px;
+            }
+            .advantages-grid {
+                gap: 8px;
+            }
+            .advantage-card {
+                padding: 14px 8px;
+            }
+            .advantage-card .icon {
+                font-size: 22px;
+                margin-bottom: 6px;
+            }
+            .advantage-card h3 {
+                font-size: 12px;
+            }
+            .advantage-card p {
+                font-size: 10px;
+            }
+            .contacts-info p {
+                font-size: 13px;
+            }
+            .mobile-menu a {
+                font-size: 16px;
+            }
+            .mobile-menu {
+                padding: 80px 24px;
+            }
+            .menu-btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+            footer h3 {
+                font-size: 18px;
+            }
+            .footer-social {
+                gap: 14px;
+            }
+            .footer-social a {
+                font-size: 11px;
+            }
+            footer .logo-footer img {
+                height: 40px;
+            }
+            .slider-dots {
+                gap: 8px;
+                padding: 6px 0 20px;
+            }
+            .slider-dots span {
+                width: 8px;
+                height: 8px;
+            }
+            .slider-dots span.active {
+                width: 20px;
+            }
+
+            .modal-content {
+                padding: 20px 14px;
+            }
+            .modal-title {
+                font-size: 22px;
+            }
+            .modal-text {
+                font-size: 13px;
+            }
+            .modal-img {
+                height: 150px;
+            }
         }
     </style>
-
 </head>
-
 <body>
 
-    <!-- ===== HEADER ===== -->
+    <!-- HEADER -->
     <header>
-
         <div class="container">
-
             <a href="#" class="logo">
                 <img src="images/logo.jpg" alt="Гармония">
                 <span class="logo-text">Гармония</span>
             </a>
-
             <nav>
                 <ul>
                     <li><a href="#home">Главная</a></li>
@@ -122,374 +1074,237 @@
                     <li><a href="#contacts">Контакты</a></li>
                 </ul>
             </nav>
-
             <div class="burger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-
         </div>
-
     </header>
 
-    <!-- ===== MOBILE MENU ===== -->
+    <!-- MOBILE MENU -->
     <div class="mobile-menu">
         <a href="#home">Главная</a>
         <a href="#services">Услуги</a>
         <a href="#about">О нас</a>
         <a href="#advantages">Преимущества</a>
         <a href="#contacts">Контакты</a>
-        <a href="#" class="menu-btn">Записаться</a>
+        <a href="https://max.ru/u/f9LHodD0cOLnTzbYgM_EQbvNBvzqVZ_TdBzdljqxyiWRTMQwtkBBhJDuxYM?text=Здравствуйте!%20Хочу%20записаться%20на%20процедуру%20в%20центр%20«Гармония»." class="menu-btn" target="_blank">Записаться</a>
     </div>
 
-    <!-- ===== HERO ===== -->
+    <!-- HERO -->
     <section class="hero" id="home">
-
         <div class="hero-overlay"></div>
-
-        <!-- ФОНОВОЕ ИЗОБРАЖЕНИЕ ДЛЯ МОБИЛЬНЫХ -->
         <div class="hero-bg-mobile" style="display:none;"></div>
-
         <div class="container hero-container">
-
             <div class="hero-text">
-
                 <span class="subtitle">Центр красоты и здоровья</span>
-
                 <h1>Гармония</h1>
-
                 <p>
                     Современный центр эстетической косметологии,
                     ухода за лицом и телом, где каждая процедура
                     направлена на вашу красоту, здоровье и внутреннюю гармонию.
                 </p>
-
                 <div class="hero-buttons">
-
                     <a href="https://max.ru/u/f9LHodD0cOLnTzbYgM_EQbvNBvzqVZ_TdBzdljqxyiWRTMQwtkBBhJDuxYM?text=Здравствуйте!%20Хочу%20записаться%20на%20процедуру%20в%20центр%20«Гармония»." class="gold-btn" target="_blank">Записаться</a>
-
                     <a href="#services" class="transparent-btn">Наши услуги</a>
-
                 </div>
-
             </div>
-
             <div class="hero-image">
-
                 <img src="images/hero.jpg" alt="Гармония">
-
             </div>
-
         </div>
-
     </section>
 
-    <!-- ===== УСЛУГИ ===== -->
+    <!-- SERVICES -->
     <section class="services-section" id="services">
-
         <div class="container">
-
             <div class="section-title">
-
                 <span>Наши услуги</span>
-
                 <h2>Красота начинается с заботы о себе</h2>
-
             </div>
-
         </div>
-
         <div class="services-slider-wrapper">
-
             <div class="services-slider">
 
-                <div class="service-card">
-
+                <!-- Карточка 1 -->
+                <div class="service-card" data-full-text="Биоэнергетический массаж — это инновационная процедура, объединяющая в себе микротоковую терапию, вакуумный массаж, лазерное воздействие и термоэффект. Аппарат MAGIC FOHERB с токопроводящими перчатками мягко стимулирует биологически активные точки, улучшает микроциркуляцию, снимает мышечные зажимы и запускает процессы детоксикации. После сеанса вы почувствуете прилив энергии, уменьшение отеков и выраженное расслабление всего тела. Рекомендуется курсом 6–10 процедур.">
                     <img src="images/massage.jpg" alt="Биоэнергетический массаж">
-
                     <div class="service-content">
-
                         <h3>Биоэнергетический массаж</h3>
-
-                        <p>Биоэнергетический массажер - физиотерапевтический прибор с воздействием на организм микротоковыми импульсами при помощи токопроводящих перчаток, а также вакуумным, лазерным и термическим воздействием "MAGIC FOHERB". Токовые воздействия, иглоукалывание, массаж гуаша, лечение банками и другие процедуры в одном устройстве..</p>
-
-                        <a href="#" class="service-btn">Подробнее</a>
-
+                        <p>Биоэнергетический массажер - физиотерапевтический прибор с воздействием на организм микротоковыми импульсами...</p>
+                        <span class="service-btn">Подробнее</span>
                     </div>
-
                 </div>
 
-                <div class="service-card">
-
+                <!-- Карточка 2 -->
+                <div class="service-card" data-full-text="Профессиональная чистка лица в центре «Гармония» — это глубокое очищение кожи от загрязнений, черных точек и избыточного себума. Мы используем ультразвуковой метод и бережную механическую экстракцию, предваряя процедуру распариванием и деликатным пилингом. Результат: чистые поры, свежий цвет лица, гладкая и сияющая кожа без воспалений. Процедура абсолютно безопасна, подходит для всех типов кожи, проводится с применением профессиональной косметики.">
                     <img src="images/cleaning.jpg" alt="Чистка лица">
-
                     <div class="service-content">
-
                         <h3>Чистка лица</h3>
-
                         <p>Профессиональное очищение кожи, свежесть и здоровое сияние.</p>
-
-                        <a href="#" class="service-btn">Подробнее</a>
-
+                        <span class="service-btn">Подробнее</span>
                     </div>
-
                 </div>
 
-                <div class="service-card">
-
+                <!-- Карточка 3 -->
+                <div class="service-card" data-full-text="Пилинг в «Гармонии» — это контролируемое обновление кожи с помощью кислот или энзимов, подобранных индивидуально. Поверхностный пилинг мягко отшелушивает ороговевшие клетки, выравнивает тон и придает сияние. Срединный пилинг борется с пигментацией, постакне и мелкими морщинами. Все процедуры выполняются сертифицированными косметологами с соблюдением строгих протоколов безопасности. В результате кожа становится упругой, свежей и заметно помолодевшей.">
                     <img src="images/peeling.jpg" alt="Пилинг">
-
                     <div class="service-content">
-
                         <h3>Пилинг</h3>
-
                         <p>Обновление кожи, ровный тон и естественное сияние.</p>
-
-                        <a href="#" class="service-btn">Подробнее</a>
-
+                        <span class="service-btn">Подробнее</span>
                     </div>
-
                 </div>
 
-                <div class="service-card">
-
+                <!-- Карточка 4 -->
+                <div class="service-card" data-full-text="Аппаратный лифтинг без операции — это RF-лифтинг и ультразвуковая подтяжка, стимулирующие выработку собственного коллагена и эластина. Процедура эффективна для коррекции овала лица, уменьшения носогубных складок, подтяжки кожи век и шеи. Эффект наступает постепенно и сохраняется до 12–18 месяцев. Рекомендуемый курс — 4–6 сеансов с интервалом 7–10 дней. Доверьтесь профессионалам и верните молодость без реабилитации.">
                     <img src="images/lifting.jpg" alt="Лифтинг">
-
                     <div class="service-content">
-
                         <h3>Лифтинг</h3>
-
                         <p>Современные процедуры омоложения без операции.</p>
-
-                        <a href="#" class="service-btn">Подробнее</a>
-
+                        <span class="service-btn">Подробнее</span>
                     </div>
-
                 </div>
 
-                <div class="service-card">
-
+                <!-- Карточка 5 -->
+                <div class="service-card" data-full-text="Лазерная эпиляция на современном диодном лазере — это комфортный и безопасный способ избавиться от нежелательных волос навсегда. Лазерный луч воздействует избирательно на волосяные фолликулы, не повреждая окружающую кожу. Процедура практически безболезненна, подходит для всех зон (лицо, ноги, бикини, подмышки). Уже после 4–6 сеансов рост волос замедляется, а оставшиеся волоски становятся тонкими и незаметными. Забудьте о бритье и раздражении!">
                     <img src="images/laser.jpg" alt="Лазерная эпиляция">
-
                     <div class="service-content">
-
                         <h3>Лазерная эпиляция</h3>
-
                         <p>Гладкая кожа надолго и без раздражения.</p>
-
-                        <a href="#" class="service-btn">Подробнее</a>
-
+                        <span class="service-btn">Подробнее</span>
                     </div>
-
                 </div>
 
-                <div class="service-card">
-
+                <!-- Карточка 6 -->
+                <div class="service-card" data-full-text="Сеанс в инфракрасном термоодеяле — это идеальное сочетание детокса и пассивного фитнеса. За 30 минут глубокое прогревание ускоряет обмен веществ, усиливает потоотделение и выводит токсины. Организм сжигает от 300 до 600 ккал, что сопоставимо с интенсивной тренировкой. Процедура помогает уменьшить объемы, улучшить состояние кожи и укрепить иммунитет. Рекомендуется курсом для максимального эффекта похудения и оздоровления.">
                     <img src="images/odel.jpg" alt="Детокс и сжигание калорий">
-
                     <div class="service-content">
-
                         <h3>Детокс и сжигание калорий</h3>
-
                         <p>30-минутный сеанс в термоодеяле поможет сжечь от 300 до 600 калорий.</p>
-
-                        <a href="#" class="service-btn">Подробнее</a>
-
+                        <span class="service-btn">Подробнее</span>
                     </div>
-
-
                 </div>
 
             </div>
-
             <div class="slider-dots">
-
                 <span class="active"></span>
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
-
             </div>
-
         </div>
-
     </section>
 
-    <!-- ===== ABOUT ===== -->
+    <!-- ABOUT -->
     <section class="about" id="about">
-
         <div class="container about-container">
-
             <div class="about-image">
                 <img src="images/salon.JPG" alt="Гармония">
             </div>
-
             <div class="about-content">
-
                 <span class="section-subtitle">О центре</span>
-
                 <h2>Гармония — место, где рождается красота</h2>
-
-                <p>
-                    Мы создали пространство, где современные технологии,
-                    профессиональный подход и атмосфера спокойствия помогают
-                    раскрыть естественную красоту каждого клиента.
-                </p>
-
-                <p>
-                    Наши специалисты используют только проверенные методики
-                    и качественную профессиональную косметику.
-                </p>
-
-                <a href="#" class="gold-btn">Записаться</a>
-
+                <p>Мы создали пространство, где современные технологии, профессиональный подход и атмосфера спокойствия помогают раскрыть естественную красоту каждого клиента.</p>
+                <p>Наши специалисты используют только проверенные методики и качественную профессиональную косметику.</p>
+                <a href="https://max.ru/u/f9LHodD0cOLnTzbYgM_EQbvNBvzqVZ_TdBzdljqxyiWRTMQwtkBBhJDuxYM?text=Здравствуйте!%20Хочу%20записаться%20на%20процедуру%20в%20центр%20«Гармония»." class="gold-btn" target="_blank">Записаться</a>
             </div>
-
         </div>
-
     </section>
 
-    <!-- ===== ADVANTAGES ===== -->
+    <!-- ADVANTAGES -->
     <section class="advantages" id="advantages">
-
         <div class="container">
-
             <span class="section-subtitle">Почему выбирают нас</span>
-
             <h2>Наши преимущества</h2>
-
             <div class="advantages-grid">
-
                 <div class="advantage-card">
-
                     <div class="icon">✨</div>
-
                     <h3>Профессионализм</h3>
-
                     <p>Сертифицированные специалисты с большим опытом работы.</p>
-
                 </div>
-
                 <div class="advantage-card">
-
                     <div class="icon">🌿</div>
-
                     <h3>Безопасность</h3>
-
                     <p>Современное оборудование и сертифицированные материалы.</p>
-
                 </div>
-
                 <div class="advantage-card">
-
                     <div class="icon">💛</div>
-
                     <h3>Индивидуальный подход</h3>
-
                     <p>Подбираем процедуры под особенности каждого клиента.</p>
-
                 </div>
-
                 <div class="advantage-card">
-
                     <div class="icon">⭐</div>
-
                     <h3>Высокий сервис</h3>
-
                     <p>Комфортная атмосфера и забота на каждом этапе.</p>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
-    <!-- ===== CONTACTS ===== -->
+    <!-- CONTACTS -->
     <section class="contacts" id="contacts">
-
         <div class="container contacts-container">
-
             <div class="contacts-info">
-
                 <span class="section-subtitle">Контакты</span>
-
                 <h2>Мы всегда рядом</h2>
-
                 <p>📍 г. Казань</p>
-
                 <p>📞 +7 (900) 000-00-00</p>
-
                 <p>✉ info@garmonia.ru</p>
-
                 <p>Ежедневно с 09:00 до 21:00</p>
-
-                <a href="#" class="gold-btn">Записаться</a>
-
+                <a href="https://max.ru/u/f9LHodD0cOLnTzbYgM_EQbvNBvzqVZ_TdBzdljqxyiWRTMQwtkBBhJDuxYM?text=Здравствуйте!%20Хочу%20записаться%20на%20процедуру%20в%20центр%20«Гармония»." class="gold-btn" target="_blank">Записаться</a>
             </div>
-
             <div class="contacts-map">
-
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2243.456!2d49.123!3d55.789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTXCsDQ3JzIwLjQiTiA0OcKwMDcnMjIuOCJF!5e0!3m2!1sru!2sru!4v1700000000000"
-                    loading="lazy"
-                    allowfullscreen>
-                </iframe>
-
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2243.456!2d49.123!3d55.789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTXCsDQ3JzIwLjQiTiA0OcKwMDcnMjIuOCJF!5e0!3m2!1sru!2sru!4v1700000000000" loading="lazy" allowfullscreen></iframe>
             </div>
-
         </div>
-
     </section>
 
-    <!-- ===== FOOTER ===== -->
+    <!-- FOOTER -->
     <footer>
-
         <div class="container footer-container">
-
             <div class="logo-footer">
                 <img src="images/logo.jpg" alt="Гармония">
             </div>
-
             <h3>Гармония</h3>
-
             <p class="footer-sub">Центр красоты и здоровья</p>
-
             <div class="footer-social">
-
-                <a href="#">Instagram</a>
-                <a href="#">Telegram</a>
-                <a href="#">WhatsApp</a>
-
+                <!-- Единая ссылка на группу Max -->
+                <a href="https://max.ru/group-link" target="_blank">Наша группа в Max</a>
             </div>
-
             <p class="copyright">© 2026 Гармония. Все права защищены.</p>
-
         </div>
-
     </footer>
 
-    <script src="js/burger.js"></script>
-    <script src="js/main.js"></script>
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ УСЛУГ -->
+    <div class="modal-overlay" id="serviceModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <img src="" alt="" class="modal-img" id="modalImg">
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-text" id="modalText"></p>
+            <a href="https://max.ru/u/f9LHodD0cOLnTzbYgM_EQbvNBvzqVZ_TdBzdljqxyiWRTMQwtkBBhJDuxYM?text=Здравствуйте!%20Хочу%20записаться%20на%20процедуру%20в%20центр%20«Гармония»." class="modal-btn" target="_blank">Записаться на процедуру</a>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
     <script>
-        // ===== БУРГЕР-МЕНЮ =====
+        // Бургер-меню
         document.addEventListener('DOMContentLoaded', function() {
-    
             const burger = document.querySelector('.burger');
             const mobileMenu = document.querySelector('.mobile-menu');
             const body = document.body;
-    
+
             burger.addEventListener('click', function(e) {
                 e.stopPropagation();
                 mobileMenu.classList.toggle('active');
                 burger.classList.toggle('active');
                 body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
             });
-    
+
             const menuLinks = mobileMenu.querySelectorAll('a');
             menuLinks.forEach(link => {
                 link.addEventListener('click', function() {
@@ -498,7 +1313,7 @@
                     body.style.overflow = '';
                 });
             });
-    
+
             document.addEventListener('click', function(e) {
                 if (!mobileMenu.contains(e.target) && !burger.contains(e.target)) {
                     mobileMenu.classList.remove('active');
@@ -506,23 +1321,19 @@
                     body.style.overflow = '';
                 }
             });
-    
         });
 
-        // ===== РАБОТА СЛАЙДЕР-ТОЧЕК =====
+        // Слайдер точек
         document.addEventListener('DOMContentLoaded', function() {
-
             const slider = document.querySelector('.services-slider');
             const dots = document.querySelectorAll('.slider-dots span');
             const cards = slider.querySelectorAll('.service-card');
 
             if (slider && dots.length && cards.length) {
-
                 function updateActiveDot() {
                     const scrollLeft = slider.scrollLeft;
                     const cardWidth = cards[0].offsetWidth + 24;
                     const activeIndex = Math.round(scrollLeft / cardWidth);
-
                     dots.forEach((dot, index) => {
                         dot.classList.toggle('active', index === activeIndex);
                     });
@@ -548,9 +1359,58 @@
 
                 setTimeout(updateActiveDot, 100);
             }
+        });
 
+        // Модальное окно для услуг
+        document.addEventListener('DOMContentLoaded', function() {
+            const modalOverlay = document.getElementById('serviceModal');
+            const modalClose = document.getElementById('modalClose');
+            const modalImg = document.getElementById('modalImg');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalText = document.getElementById('modalText');
+            const serviceBtns = document.querySelectorAll('.service-btn');
+
+            // Открытие модального окна
+            serviceBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const card = this.closest('.service-card');
+                    if (!card) return;
+
+                    const imgSrc = card.querySelector('img').getAttribute('src');
+                    const title = card.querySelector('h3').textContent;
+                    const fullText = card.getAttribute('data-full-text') || 'Описание появится в ближайшее время.';
+
+                    modalImg.setAttribute('src', imgSrc);
+                    modalImg.setAttribute('alt', title);
+                    modalTitle.textContent = title;
+                    modalText.textContent = fullText;
+
+                    modalOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Закрытие
+            function closeModal() {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            modalClose.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+
+            // Закрытие по Esc
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            });
         });
     </script>
 </body>
-
 </html>
