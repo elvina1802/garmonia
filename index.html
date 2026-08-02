@@ -813,7 +813,16 @@
             color: #ffffff;
         }
 
-        .price-modal-content img {
+        .price-image-wrapper {
+            display: none;
+            width: 100%;
+        }
+
+        .price-image-wrapper.active {
+            display: block;
+        }
+
+        .price-image-wrapper img {
             width: 100%;
             height: auto;
             border-radius: 16px;
@@ -1243,7 +1252,7 @@
                         <p>Биоэнергетический массажер - физиотерапевтический прибор с воздействием на организм микротоковыми импульсами...</p>
                         <div class="service-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
                             <span class="service-btn">Подробнее</span>
-                            <span class="price-btn" data-price-img="images/price-massage.jpg" style="display: block; width: 100%;">Прайс</span>
+                            <span class="price-btn" data-price-target="price-massage" style="display: block; width: 100%;">Прайс</span>
                         </div>
                     </div>
                 </div>
@@ -1259,7 +1268,7 @@
 · Всесезонный пилинг для жирной, проблемной, плотной кожи    </p>
                         <div class="service-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
                             <span class="service-btn">Подробнее</span>
-                            <span class="price-btn" data-price-img="images/price-cleaning.jpg" style="display: block; width: 100%;">Прайс</span>
+                            <span class="price-btn" data-price-target="price-cleaning" style="display: block; width: 100%;">Прайс</span>
                         </div>
                     </div>
                 </div>
@@ -1272,7 +1281,7 @@
                         <p>Современные процедуры омоложения без операции.</p>
                         <div class="service-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
                             <span class="service-btn">Подробнее</span>
-                            <span class="price-btn" data-price-img="images/price-lifting.jpg" style="display: block; width: 100%;">Прайс</span>
+                            <span class="price-btn" data-price-target="price-lifting" style="display: block; width: 100%;">Прайс</span>
                         </div>
                     </div>
                 </div>
@@ -1285,7 +1294,7 @@
                         <p>Гладкая кожа надолго и без раздражения.</p>
                         <div class="service-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
                             <span class="service-btn">Подробнее</span>
-                            <span class="price-btn" data-price-img="images/price-laser.jpg" style="display: block; width: 100%;">Прайс</span>
+                            <span class="price-btn" data-price-target="price-laser" style="display: block; width: 100%;">Прайс</span>
                         </div>
                     </div>
                 </div>
@@ -1304,7 +1313,7 @@
 Время процедуры 90 минут.</p>
                         <div class="service-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
                             <span class="service-btn">Подробнее</span>
-                            <span class="price-btn" data-price-img="images/price-odel.jpg" style="display: block; width: 100%;">Прайс</span>
+                            <span class="price-btn" data-price-target="price-odel" style="display: block; width: 100%;">Прайс</span>
                         </div>
                     </div>
                 </div>
@@ -1420,7 +1429,37 @@
     <div class="price-modal-overlay" id="priceModal">
         <div class="price-modal-content">
             <button class="price-modal-close" id="priceModalClose">&times;</button>
-            <img src="images/price.jpg" alt="Прайс-лист" id="priceModalImg">
+
+            <!-- ПРАЙСЫ ВСТАВЛЕНЫ НАПРЯМУЮ В HTML -->
+            <!-- Картинка прайса для Биоэнергетического массажа -->
+            <div class="price-image-wrapper" id="price-massage">
+                <!-- ВСТАВЬТЕ СЮДА ВАШУ КАРТИНКУ ПРАЙСА ДЛЯ МАССАЖА -->
+                <img src="images/price-massage.jpg" alt="Прайс Биоэнергетический массаж">
+            </div>
+
+            <!-- Картинка прайса для Чистки лица -->
+            <div class="price-image-wrapper" id="price-cleaning">
+                <!-- ВСТАВЬТЕ СЮДА ВАШУ КАРТИНКУ ПРАЙСА ДЛЯ ЧИСТКИ -->
+                <img src="images/price-cleaning.jpg" alt="Прайс Чистка лица">
+            </div>
+
+            <!-- Картинка прайса для Лифтинга -->
+            <div class="price-image-wrapper" id="price-lifting">
+                <!-- ВСТАВЬТЕ СЮДА ВАШУ КАРТИНКУ ПРАЙСА ДЛЯ ЛИФТИНГА -->
+                <img src="images/price-lifting.jpg" alt="Прайс Лифтинг">
+            </div>
+
+            <!-- Картинка прайса для Эстетической коррекции волос -->
+            <div class="price-image-wrapper" id="price-laser">
+                <!-- ВСТАВЬТЕ СЮДА ВАШУ КАРТИНКУ ПРАЙСА ДЛЯ ЛАЗЕРА -->
+                <img src="images/price-laser.jpg" alt="Прайс Эстетическая коррекция волос">
+            </div>
+
+            <!-- Картинка прайса для Королевского ухода за телом -->
+            <div class="price-image-wrapper" id="price-odel">
+                <!-- ВСТАВЬТЕ СЮДА ВАШУ КАРТИНКУ ПРАЙСА ДЛЯ УХОДА ЗА ТЕЛОМ -->
+                <img src="images/price-odel.jpg" alt="Прайс Королевский уход за телом">
+            </div>
         </div>
     </div>
 
@@ -1550,8 +1589,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             const priceModalOverlay = document.getElementById('priceModal');
             const priceModalClose = document.getElementById('priceModalClose');
-            const priceModalImg = document.getElementById('priceModalImg');
             const priceBtns = document.querySelectorAll('.price-btn');
+            const allPriceWrappers = document.querySelectorAll('.price-image-wrapper');
 
             // Открытие модального окна прайса
             priceBtns.forEach(btn => {
@@ -1559,12 +1598,20 @@
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    // Получаем путь к изображению прайса из data-атрибута
-                    const priceImgSrc = this.getAttribute('data-price-img');
+                    // Получаем ID нужного прайса
+                    const targetId = this.getAttribute('data-price-target');
                     
-                    // Если указан путь к изображению, устанавливаем его
-                    if (priceImgSrc) {
-                        priceModalImg.setAttribute('src', priceImgSrc);
+                    // Скрываем все картинки прайсов
+                    allPriceWrappers.forEach(wrapper => {
+                        wrapper.classList.remove('active');
+                    });
+                    
+                    // Показываем нужную картинку
+                    if (targetId) {
+                        const targetWrapper = document.getElementById(targetId);
+                        if (targetWrapper) {
+                            targetWrapper.classList.add('active');
+                        }
                     }
                     
                     priceModalOverlay.classList.add('active');
@@ -1576,8 +1623,11 @@
             function closePriceModal() {
                 priceModalOverlay.classList.remove('active');
                 document.body.style.overflow = '';
-                // Сбрасываем изображение при закрытии
-                priceModalImg.setAttribute('src', 'images/price.jpg');
+                
+                // Скрываем все картинки при закрытии
+                allPriceWrappers.forEach(wrapper => {
+                    wrapper.classList.remove('active');
+                });
             }
 
             priceModalClose.addEventListener('click', closePriceModal);
