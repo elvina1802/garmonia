@@ -922,7 +922,6 @@
                 display: flex;
             }
 
-            /* Мобильный hero с фоновой картинкой */
             .hero {
                 position: relative;
                 min-height: 100vh;
@@ -955,7 +954,7 @@
                 min-height: 100dvh;
                 display: flex;
                 align-items: center;
-                grid-template-columns: 1fr; /* меняем на одну колонку */
+                grid-template-columns: 1fr;
                 padding-top: 80px;
             }
 
@@ -1049,7 +1048,6 @@
                 margin-right: auto;
             }
 
-            /* Модальное окно на телефоне */
             .modal-content {
                 padding: 24px 18px;
             }
@@ -1244,15 +1242,17 @@
         <div class="services-slider-wrapper">
             <div class="services-slider">
 
+                <!-- ===== СТАРЫЕ КАРТОЧКИ (1-5) ===== -->
+
                 <!-- Карточка 1 -->
                 <div class="service-card" data-full-text="Биоэнергетический массаж — это инновационная процедура, объединяющая в себе микротоковую терапию, вакуумный массаж, лазерное воздействие и термоэффект. Аппарат MAGIC FOHERB с токопроводящими перчатками мягко стимулирует биологически активные точки, улучшает микроциркуляцию, снимает мышечные зажимы и запускает процессы детоксикации. После сеанса вы почувствуете прилив энергии, уменьшение отеков и выраженное расслабление всего тела. Рекомендуется курсом 6–10 процедур.">
                     <img src="images/massage.jpg" alt="Биоэнергетический массаж">
                     <div class="service-content">
                         <h3>Биоэнергетический массаж</h3>
                         <p>Биоэнергетический массажер - физиотерапевтический прибор с воздействием на организм микротоковыми импульсами...</p>
-                        <div class="service-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+                        <div class="service-buttons">
                             <span class="service-btn">Подробнее</span>
-                            <span class="price-btn" data-price-target="price-massage" style="display: block; width: 100%;">Прайс</span>
+                            <span class="price-btn" data-price-target="price-massage">Прайс</span>
                         </div>
                     </div>
                 </div>
@@ -1262,13 +1262,10 @@
                     <img src="images/cleaning.jpg" alt="Профессиональная чистка лица 'Сияй'">
                     <div class="service-content">
                         <h3>Профессиональная чистка лица "Сияй"</h3>
-                        <p>Включает<br>·Атравматическая чистка с холодным гидрированием для любого типа кожи <br>
-· Восстанавливающий уход для проблемной кожи <br>
-· Восстанавливающий, противовоспалительный уход для кожи с расширенными порами, акне, постакне, воспалительными элементами<br>
-· Всесезонный пилинг для жирной, проблемной, плотной кожи    </p>
-                        <div class="service-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+                        <p>Атравматическая чистка, восстанавливающий уход для проблемной кожи, пилинг для жирной кожи.</p>
+                        <div class="service-buttons">
                             <span class="service-btn">Подробнее</span>
-                            <span class="price-btn" data-price-target="price-cleaning" style="display: block; width: 100%;">Прайс</span>
+                            <span class="price-btn" data-price-target="price-cleaning">Прайс</span>
                         </div>
                     </div>
                 </div>
@@ -1279,9 +1276,9 @@
                     <div class="service-content">
                         <h3>Лифтинг</h3>
                         <p>Современные процедуры омоложения без операции.</p>
-                        <div class="service-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+                        <div class="service-buttons">
                             <span class="service-btn">Подробнее</span>
-                            <span class="price-btn" data-price-target="price-lifting" style="display: block; width: 100%;">Прайс</span>
+                            <span class="price-btn" data-price-target="price-lifting">Прайс</span>
                         </div>
                     </div>
                 </div>
@@ -1292,9 +1289,9 @@
                     <div class="service-content">
                         <h3>Эстетическая коррекция волос</h3>
                         <p>Гладкая кожа надолго и без раздражения.</p>
-                        <div class="service-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+                        <div class="service-buttons">
                             <span class="service-btn">Подробнее</span>
-                            <span class="price-btn" data-price-target="price-laser" style="display: block; width: 100%;">Прайс</span>
+                            <span class="price-btn" data-price-target="price-laser">Прайс</span>
                         </div>
                     </div>
                 </div>
@@ -1304,16 +1301,77 @@
                     <img src="images/odel.jpg" alt="Королевский уход за телом">
                     <div class="service-content">
                         <h3>Королевский уход за телом</h3>
-                        <p>Включено <br>
-• Ручной массаж 30 минут (проблемные зоны) <br>
-• Обертывание со специальным гелем(линейка ASPA) <br>
-• Термоодеяло с костюмом для эффекта сауны 30 минут <br>
-• Завершением процедуры является нанесение увлажняющего крема 🧴  с расслабляющим массажем 10 минут <br>
-
-Время процедуры 90 минут.</p>
-                        <div class="service-buttons" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">
+                        <p>Ручной массаж, обертывание, термоодеяло, увлажняющий крем. 90 минут.</p>
+                        <div class="service-buttons">
                             <span class="service-btn">Подробнее</span>
-                            <span class="price-btn" data-price-target="price-odel" style="display: block; width: 100%;">Прайс</span>
+                            <span class="price-btn" data-price-target="price-odel">Прайс</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== НОВЫЕ КАРТОЧКИ (6-10) ===== -->
+
+                <!-- Карточка 6: Оздоровительный массаж на все тело -->
+                <div class="service-card" data-full-text="Оздоровительный массаж на все тело — это глубокое воздействие, которое отлично подходит для устранения болей, триггерных зон и забитых мышц. Процедура помогает расслабить тело, улучшить кровообращение и снять мышечное напряжение. Доступно два варианта: 70 минут (3500₽) или 90 минут (4000₽) массажа. Абонемент на 5 сеансов — 15000₽ и 18000₽ соответственно.">
+                    <img src="images/full_body_massage.jpg" alt="Оздоровительный массаж на все тело">
+                    <div class="service-content">
+                        <h3>Оздоровительный массаж на все тело</h3>
+                        <p>Глубокое воздействие для устранения болей и забитых мышц. 70 или 90 минут.</p>
+                        <div class="service-buttons">
+                            <span class="service-btn">Подробнее</span>
+                            <span class="price-btn" data-price-target="price-full-body">Прайс</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 7: Оздоровительный массаж спины -->
+                <div class="service-card" data-full-text="Оздоровительный массаж спины — это процедура длительностью 50 минут, которая помогает снять напряжение и боль в области спины. Массаж глубоко прорабатывает мышцы, улучшает кровообращение и способствует восстановлению после физических нагрузок. Стоимость — 2500₽. Доступны абонементы на 5 сеансов (10000₽) и 10 сеансов (20000₽).">
+                    <img src="images/back_massage_new.jpg" alt="Оздоровительный массаж спины">
+                    <div class="service-content">
+                        <h3>Оздоровительный массаж спины</h3>
+                        <p>50 минут глубокого массажа для снятия боли и напряжения в спине.</p>
+                        <div class="service-buttons">
+                            <span class="service-btn">Подробнее</span>
+                            <span class="price-btn" data-price-target="price-back-new">Прайс</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 8: Хиджама -->
+                <div class="service-card" data-full-text="Хиджама (капиллярное кровопускание) — это древний метод очищения организма. Процедура проводится стерильно, с использованием одноразовых банок, без образования шрамов. Включает 30 минут оздоровительного массажа. Стоимость сеанса — 3500₽. Эффективно помогает при головных болях, остеохондрозе, гипертонии и варикозе.">
+                    <img src="images/hijama_new.jpg" alt="Хиджама">
+                    <div class="service-content">
+                        <h3>Хиджама (капиллярное кровопускание)</h3>
+                        <p>Стерильно, без шрамов, одноразовые банки + 30 минут массажа.</p>
+                        <div class="service-buttons">
+                            <span class="service-btn">Подробнее</span>
+                            <span class="price-btn" data-price-target="price-hijama-new">Прайс</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 9: Вакуумная терапия -->
+                <div class="service-card" data-full-text="Вакуумная терапия — это эффективная процедура для моделирования фигуры и борьбы с целлюлитом. Воздействие на выбранную зону: спина, ягодицы, бедра, ноги, живот или руки. Стоимость сеанса — 2500₽. Процедура улучшает лимфодренаж, стимулирует кровообращение и способствует расщеплению жировой ткани.">
+                    <img src="images/vacuum_new.jpg" alt="Вакуумная терапия">
+                    <div class="service-content">
+                        <h3>Вакуумная терапия</h3>
+                        <p>Моделирование фигуры на выбранной зоне: спина, ягодицы, бедра, ноги, живот, руки.</p>
+                        <div class="service-buttons">
+                            <span class="service-btn">Подробнее</span>
+                            <span class="price-btn" data-price-target="price-vacuum-new">Прайс</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка 10: Комплекс -->
+                <div class="service-card" data-full-text="Комплексная программа включает оздоровительный массаж, вакуумную терапию и хиджаму. Доступны два варианта: для спины (4000₽) и на все тело (6000₽). Также предлагается оздоровительный массаж всего тела + лицо (120 минут — 6000₽). Это идеальное решение для комплексного ухода за телом и лицом.">
+                    <img src="images/complex_new.jpg" alt="Комплекс">
+                    <div class="service-content">
+                        <h3>Комплекс (массаж + вакуум + хиджама)</h3>
+                        <p>СПИНА — 4000₽ | ВСЕ ТЕЛО — 6000₽ | Массаж + лицо (120 мин) — 6000₽</p>
+                        <div class="service-buttons">
+                            <span class="service-btn">Подробнее</span>
+                            <span class="price-btn" data-price-target="price-complex-new">Прайс</span>
                         </div>
                     </div>
                 </div>
@@ -1321,6 +1379,11 @@
             </div>
             <div class="slider-dots">
                 <span class="active"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
@@ -1389,11 +1452,11 @@
             </div>
             <div class="contacts-map">
                 <iframe 
-    src="https://www.google.com/maps?q=с.+Сокуры,+ул.+Державина,+9Б+стр.+1&output=embed"
-    loading="lazy"
-    allowfullscreen
-    style="border:0; width:100%; height:100%; min-height:320px;">
-</iframe>
+                    src="https://www.google.com/maps?q=с.+Сокуры,+ул.+Державина,+9Б+стр.+1&output=embed"
+                    loading="lazy"
+                    allowfullscreen
+                    style="border:0; width:100%; height:100%; min-height:320px;">
+                </iframe>
             </div>
         </div>
     </section>
@@ -1407,7 +1470,6 @@
             <h3>Грация</h3>
             <p class="footer-sub">Студия красоты и здоровья</p>
             <div class="footer-social">
-                <!-- Единая ссылка на группу Max -->
                 <a href="https://max.ru/join/Ld3MmmApaV6QwvbxUkUYfjW63GCIbzExap1zqipxS6M" target="_blank">Наша группа в Max</a>
             </div>
             <p class="copyright">© 2026 Грация. Все права защищены.</p>
@@ -1430,35 +1492,38 @@
         <div class="price-modal-content">
             <button class="price-modal-close" id="priceModalClose">&times;</button>
 
-            <!-- ПРАЙСЫ ВСТАВЛЕНЫ НАПРЯМУЮ В HTML -->
-            <!-- Картинка прайса для Биоэнергетического массажа -->
+            <!-- ПРАЙСЫ для старых карточек -->
             <div class="price-image-wrapper" id="price-massage">
-                <!-- ВСТАВЬТЕ СЮДА ВАШУ КАРТИНКУ ПРАЙСА ДЛЯ МАССАЖА -->
                 <img src="images/price-massage.jpg" alt="Прайс Биоэнергетический массаж">
             </div>
-
-            <!-- Картинка прайса для Чистки лица -->
             <div class="price-image-wrapper" id="price-cleaning">
-                <!-- ВСТАВЬТЕ СЮДА ВАШУ КАРТИНКУ ПРАЙСА ДЛЯ ЧИСТКИ -->
                 <img src="images/price-cleaning.jpg" alt="Прайс Чистка лица">
             </div>
-
-            <!-- Картинка прайса для Лифтинга -->
             <div class="price-image-wrapper" id="price-lifting">
-                <!-- ВСТАВЬТЕ СЮДА ВАШУ КАРТИНКУ ПРАЙСА ДЛЯ ЛИФТИНГА -->
                 <img src="images/price-lifting.jpg" alt="Прайс Лифтинг">
             </div>
-
-            <!-- Картинка прайса для Эстетической коррекции волос -->
             <div class="price-image-wrapper" id="price-laser">
-                <!-- ВСТАВЬТЕ СЮДА ВАШУ КАРТИНКУ ПРАЙСА ДЛЯ ЛАЗЕРА -->
                 <img src="images/price-laser.jpg" alt="Прайс Эстетическая коррекция волос">
             </div>
-
-            <!-- Картинка прайса для Королевского ухода за телом -->
             <div class="price-image-wrapper" id="price-odel">
-                <!-- ВСТАВЬТЕ СЮДА ВАШУ КАРТИНКУ ПРАЙСА ДЛЯ УХОДА ЗА ТЕЛОМ -->
                 <img src="images/price-odel.jpg" alt="Прайс Королевский уход за телом">
+            </div>
+
+            <!-- ПРАЙСЫ для новых карточек -->
+            <div class="price-image-wrapper" id="price-full-body">
+                <img src="images/price-full-body.jpg" alt="Прайс Оздоровительный массаж на все тело">
+            </div>
+            <div class="price-image-wrapper" id="price-back-new">
+                <img src="images/price-back-new.jpg" alt="Прайс Оздоровительный массаж спины">
+            </div>
+            <div class="price-image-wrapper" id="price-hijama-new">
+                <img src="images/price-hijama-new.jpg" alt="Прайс Хиджама">
+            </div>
+            <div class="price-image-wrapper" id="price-vacuum-new">
+                <img src="images/price-vacuum-new.jpg" alt="Прайс Вакуумная терапия">
+            </div>
+            <div class="price-image-wrapper" id="price-complex-new">
+                <img src="images/price-complex-new.jpg" alt="Прайс Комплекс">
             </div>
         </div>
     </div>
@@ -1543,7 +1608,6 @@
             const modalText = document.getElementById('modalText');
             const serviceBtns = document.querySelectorAll('.service-btn');
 
-            // Открытие модального окна услуги
             serviceBtns.forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1564,7 +1628,6 @@
                 });
             });
 
-            // Закрытие модального окна услуги
             function closeModal() {
                 modalOverlay.classList.remove('active');
                 document.body.style.overflow = '';
@@ -1577,7 +1640,6 @@
                 }
             });
 
-            // Закрытие по Esc
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
                     closeModal();
@@ -1592,21 +1654,17 @@
             const priceBtns = document.querySelectorAll('.price-btn');
             const allPriceWrappers = document.querySelectorAll('.price-image-wrapper');
 
-            // Открытие модального окна прайса
             priceBtns.forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     
-                    // Получаем ID нужного прайса
                     const targetId = this.getAttribute('data-price-target');
                     
-                    // Скрываем все картинки прайсов
                     allPriceWrappers.forEach(wrapper => {
                         wrapper.classList.remove('active');
                     });
                     
-                    // Показываем нужную картинку
                     if (targetId) {
                         const targetWrapper = document.getElementById(targetId);
                         if (targetWrapper) {
@@ -1619,12 +1677,9 @@
                 });
             });
 
-            // Закрытие модального окна прайса
             function closePriceModal() {
                 priceModalOverlay.classList.remove('active');
                 document.body.style.overflow = '';
-                
-                // Скрываем все картинки при закрытии
                 allPriceWrappers.forEach(wrapper => {
                     wrapper.classList.remove('active');
                 });
@@ -1637,7 +1692,6 @@
                 }
             });
 
-            // Закрытие по Esc
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && priceModalOverlay.classList.contains('active')) {
                     closePriceModal();
