@@ -929,8 +929,9 @@
                 overflow: hidden;
             }
 
+            /* Исправлено: блок теперь управляется только через CSS */
             .hero-bg-mobile {
-                display: block !important;
+                display: block;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -1210,7 +1211,7 @@
     <!-- HERO -->
     <section class="hero" id="home">
         <div class="hero-overlay"></div>
-        <div class="hero-bg-mobile" style="display:none;"></div>
+        <div class="hero-bg-mobile"></div>
         <div class="container hero-container">
             <div class="hero-text">
                 <span class="subtitle">Студия красоты и здоровья</span>
@@ -1241,8 +1242,6 @@
         </div>
         <div class="services-slider-wrapper">
             <div class="services-slider">
-
-                <!-- ===== СТАРЫЕ КАРТОЧКИ (1-5) ===== -->
 
                 <!-- Карточка 1 -->
                 <div class="service-card" data-full-text="Биоэнергетический массаж — это инновационная процедура, объединяющая в себе микротоковую терапию, вакуумный массаж, лазерное воздействие и термоэффект. Аппарат MAGIC FOHERB с токопроводящими перчатками мягко стимулирует биологически активные точки, улучшает микроциркуляцию, снимает мышечные зажимы и запускает процессы детоксикации. После сеанса вы почувствуете прилив энергии, уменьшение отеков и выраженное расслабление всего тела. Рекомендуется курсом 6–10 процедур.">
@@ -1309,14 +1308,10 @@
                     </div>
                 </div>
 
-                <!-- ===== НОВЫЕ КАРТОЧКИ (6-10) ===== -->
+            </div> <!-- Закрыт тег .services-slider -->
+            
             <div class="slider-dots">
                 <span class="active"></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
